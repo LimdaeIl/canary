@@ -1,0 +1,45 @@
+server:
+  port: 40000
+
+spring:
+  application:
+    name: catalog-service
+
+  datasource:
+    url: jdbc:mysql://${RDS_ENDPOINT:localhost}:3456/canary?sslMode=PREFERRED&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true&cachePrepStmts=true&prepStmtCacheSize=250&prepStmtCacheSqlLimit=2048&useServerPrepStmts=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${RDS_USERNAME:canary}
+    password: ${RDS_PASSWORD:canary}
+
+    hikari:
+      pool-name: hikari-dev
+      maximum-pool-size: 10
+      minimum-idle: 1
+      leak-detection-threshold: 60000
+      connection-timeout: 3000     # 3s  → 3,000 ms
+      max-lifetime: 1800000        # 30m → 1,800,000 ms
+      idle-timeout: 300000         # 5m  →   300,000 ms
+
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: false
+        highlight_sql: false
+        show_sql: false
+        jdbc.time_zone: Asia/Seoul
+        generate_statistics: true
+        session.events.log.LOG_QUERIES_SLOWER_THAN_MS: 300
+
+    open-in-view: false
+
+mybatis:
+  mapper-locations: classpath*:mybatis/mapper/**/*.xml
+  type-aliases-package: com.spring.canary   # 선택(별칭 쓰면 편함)
+
+#logging:
+#  level:
+#    p6spy: OFF
+#    com.p6spy: OFF

@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: dev
+
+snowflake:
+  epoch-millis: ${SNOWFLAKE_EPOCH_MILLIS:1758499200000}             # 2025-09-22T00:00:00Z
+  node-id: ${SNOWFLAKE_NODE_ID:1}                                   # 각 인스턴스/노드별 고유 값 할당
+  clock-skew-tolerance-millis: ${SNOWFLAKE_CLOCK_SKEW_TOLERANCE_MILLIS:10}  # 5~20 권장
+  auto-detect-node-id: ${SNOWFLAKE_AUTO_DETECT_NODE_ID:true}       # 운영에선 명시 지정 권장
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,prometheus"
+  endpoint:
+    health:
+      show-details: "never"
+  metrics:
+    tags:
+      application: canary-app
