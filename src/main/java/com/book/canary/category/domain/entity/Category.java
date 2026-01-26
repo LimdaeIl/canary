@@ -35,4 +35,11 @@ public class Category {
         return new Category(name);
     }
 
+    public void updateName(String name) {
+        if (this.name.equals(name)) {
+            return;
+        }
+
+        this.name = name;
+    }
 }

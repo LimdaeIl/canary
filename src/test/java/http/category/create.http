@@ -11,7 +11,7 @@ POST http://localhost:10000/api/v1/categories
 Content-Type: application/json
 
 {
-  "name": "크로스백",
-  "parentId": 11
+  "name": "상의",
+  "parentId": 1
 }
 

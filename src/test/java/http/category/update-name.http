@@ -1,0 +1,7 @@
+### 카테고리 생성(루트)
+PATCH http://localhost:10000/api/v1/categories/1
+Content-Type: application/json
+
+{
+  "name": "남성"
+}
